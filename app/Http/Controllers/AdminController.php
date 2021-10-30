@@ -16,6 +16,8 @@ use App\Models\Faqs;
 use App\Models\Testimonials;
 use App\Models\Team;
 use App\Models\Prices;
+use App\Models\Pages;
+use App\Models\Partners;
 
 class AdminController extends Controller
 {
@@ -375,12 +377,6 @@ class AdminController extends Controller
         }
     }
 
-
-
-
-
-    //
-
     public function priceIndex () {
         $title = 'Price';
         $data = Prices::orderBy('id', 'desc')->paginate(20);
@@ -440,6 +436,128 @@ class AdminController extends Controller
         }
     }
 
+    public function pagesIndex () {
+        $title = 'Pages';
+        $data = Pages::orderBy('id', 'desc')->paginate(20);
+        return view('admin.page-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function pagesAdd () {
+        $title = 'Add Page';
+        return view('admin.page-add', [
+            'title' => $title,
+        ]);
+    }
+
+    public function pagesStore (Request $request) {
+        $slug = Str::lower($string = str_replace(' ', '-', $request->title));
+        $slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug);
+
+        $Pages = new Pages;
+        $Pages->title       = $request->title;
+        $Pages->slug        = $slug;
+        $Pages->content     = $request->content;
+        $Pages->save();
+        return redirect ('admin/pages')->with("success","Data created successfully...");
+    }
+
+    public function pagesEdit ($id) {
+        $data = Pages::where('id',$id)->first();
+        return view('admin.page-edit', [
+            'data' => $data,
+            'title' => 'Edit Page',
+        ]);
+    }
+
+    public function pagesUpdate (Request $request)
+    {
+        $update = Pages::where('id',$request->id)
+            ->update([
+                'title'     => $request->title,
+                'slug'      => $request->slug,
+                'content'   => $request->content,
+            ]);
+        return redirect ('admin/pages')->with("success","Data updated successfully...");
+    }
+
+    public function pagesDelete (Request $request) {
+        $Pages = Pages::where('id', $request->id)->get();
+        if (!$Pages) {
+            return redirect ('admin/pages')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = Pages::where('id', $request->id)->delete();
+            return redirect ('admin/pages')->with("success","Data deleted successfully...");
+        }
+    }
+
     //
+    public function partnersIndex () {
+        $title = 'Partners';
+        $data = Partners::orderBy('id', 'desc')->paginate(20);
+        return view('admin.partner-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function partnersAdd () {
+        $title = 'Add Partner';
+        return view('admin.partner-add', [
+            'title' => $title,
+        ]);
+    }
+
+    public function partnersStore (Request $request) {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
+        $file = $request->file('image');
+        $imageName1 = time().'-'.$file->getClientOriginalName();
+        $imageName2 = Str::lower($imageName1);
+        $imageName3 = preg_replace('/\s+/', '', $imageName2);
+        $img = $request->image->move(public_path('storage/images'), $imageName3);
+
+        $Partners = new Partners;
+        $Partners->title    = $request->title;
+        $Partners->image    = $imageName3;
+        $Partners->link     = $request->link;   
+        $Partners->save();
+        return redirect ('admin/partners')->with("success","Data created successfully...");
+    }
+
+    public function partnersEdit ($id) {
+        $data = Partners::where('id',$id)->first();
+        return view('admin.partner-edit', [
+            'data' => $data,
+            'title' => 'Edit Partner',
+        ]);
+    }
+
+    public function partnersUpdate (Request $request)
+    {
+        $update = Partners::where('id',$request->id)
+            ->update([
+                'title'     => $request->title,
+                //'image'   => $request->image,
+                'link'      => $request->link,
+            ]);
+        return redirect ('admin/partners')->with("success","Data updated successfully...");
+    }
+
+    public function partnersDelete (Request $request) {
+        $Partners = Partners::where('id', $request->id)->get();
+        if (!$Partners) {
+            return redirect ('admin/partners')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = Partners::where('id', $request->id)->delete();
+            return redirect ('admin/partners')->with("success","Data deleted successfully...");
+        }
+    }
+
 
 }

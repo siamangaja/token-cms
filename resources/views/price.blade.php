@@ -37,7 +37,7 @@
                         <!-- price -->
                         <div class="price">
                             <h3 class="price__title">{{$d->title}}</h3>
-                                {!! $d->content !!}
+                            <p>{!! $d->content !!}</p>
                             <span class="price__value">{{$d->price}}</span>
                             <p class="price__text">{{$d->notes}}</p>
                             <a href="{{$d->button}}"><button class="btn btn--border btn--center" type="button">Start Now</button></a>

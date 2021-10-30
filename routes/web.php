@@ -58,14 +58,24 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/team/{id}/edit', [AdminController::class,'teamEdit'])->name('team.edit');
     Route::post('/admin/team/{id}/edit', [AdminController::class,'teamUpdate'])->name('team.update');
     Route::get('/admin/team/{id}/delete', [AdminController::class,'teamDelete'])->name('team.delete');
-
-
     Route::get('/admin/price', [AdminController::class,'priceIndex'])->name('price.index');
     Route::get('/admin/price/add', [AdminController::class,'priceAdd'])->name('price.add');
     Route::post('/admin/price/add', [AdminController::class,'priceStore'])->name('price.store');
     Route::get('/admin/price/{id}/edit', [AdminController::class,'priceEdit'])->name('price.edit');
     Route::post('/admin/price/{id}/edit', [AdminController::class,'priceUpdate'])->name('price.update');
     Route::get('/admin/price/{id}/delete', [AdminController::class,'priceDelete'])->name('price.delete');
+    Route::get('/admin/pages', [AdminController::class,'pagesIndex'])->name('page.index');
+    Route::get('/admin/page/add', [AdminController::class,'pagesAdd'])->name('page.add');
+    Route::post('/admin/page/add', [AdminController::class,'pagesStore'])->name('page.store');
+    Route::get('/admin/page/{id}/edit', [AdminController::class,'pagesEdit'])->name('page.edit');
+    Route::post('/admin/page/{id}/edit', [AdminController::class,'pagesUpdate'])->name('page.update');
+    Route::get('/admin/page/{id}/delete', [AdminController::class,'pagesDelete'])->name('page.delete');
+    Route::get('/admin/partners', [AdminController::class,'partnersIndex'])->name('partner.index');
+    Route::get('/admin/partner/add', [AdminController::class,'partnersAdd'])->name('partner.add');
+    Route::post('/admin/partner/add', [AdminController::class,'partnersStore'])->name('partner.store');
+    Route::get('/admin/partner/{id}/edit', [AdminController::class,'partnersEdit'])->name('partner.edit');
+    Route::post('/admin/partner/{id}/edit', [AdminController::class,'partnersUpdate'])->name('partner.update');
+    Route::get('/admin/partner/{id}/delete', [AdminController::class,'partnersDelete'])->name('partner.delete');
 });
 
 // User
