@@ -1,0 +1,445 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use DB;
+use Session;
+use Auth;
+use Route;
+use App\Models\Admin;
+use App\Models\User;
+use App\Models\News;
+use App\Models\Services;
+use App\Models\Faqs;
+use App\Models\Testimonials;
+use App\Models\Team;
+use App\Models\Prices;
+
+class AdminController extends Controller
+{
+
+    public function profile () {
+        $d = Admin::where('id', auth()->id())->first();
+        $title = 'My Profile';
+        return view('admin.profile', [
+            'd' => $d,
+            'title' => $title,
+        ]);
+    }
+
+    public function userIndex () {
+        $title = 'User Manager';
+        $data = User::orderBy('id', 'desc')->paginate(20);
+        return view('admin.user-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function userEdit ($id)
+    {
+        $User = User::find($id);
+        return response()->json([
+          'data' => $User
+        ]);
+    }
+
+    public function userUpdate (Request $request)
+    {
+        $update = User::where('id',$request->id)
+            ->update([
+                'name'      => $request->name,
+                'email'     => $request->email,
+                'phone'     => $request->phone,
+                'status'    => $request->status,
+            ]);
+        return redirect ('admin/users')->with("success","Data updated successfully...");
+    }
+
+    public function userDelete (Request $request) {
+        $Users = User::where('id', $request->id)->get();
+        if (!$Users) {
+            return redirect ('admin/users')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = User::where('id', $request->id)->delete();
+            return redirect ('admin/users')->with("success","Data deleted successfully...");
+        }
+    }
+
+    public function newsIndex () {
+        $title = 'News';
+        $data = News::orderBy('id', 'desc')->paginate(20);
+        return view('admin.news-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function newsAdd () {
+        $title = 'Add News';
+        return view('admin.news-add', [
+            'title' => $title,
+        ]);
+    }
+
+    public function newsStore (Request $request) {
+        $request->validate([
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
+        $file = $request->file('thumbnail');
+        $imageName1 = time().'-'.$file->getClientOriginalName();
+        $imageName2 = Str::lower($imageName1);
+        $imageName3 = preg_replace('/\s+/', '', $imageName2);
+        $img = $request->thumbnail->move(public_path('storage/images'), $imageName3);
+        $slug = Str::lower($string = str_replace(' ', '-', $request->title));
+        $slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug);
+
+        $News = new News;
+        $News->title        = $request->title;
+        $News->slug         = $slug;
+        $News->thumbnail    = $imageName3;
+        $News->content      = $request->content;
+        $News->status       = $request->status;
+        $News->save();
+        return redirect ('admin/news')->with("success","Data created successfully...");
+    }
+
+
+    public function newsEdit ($id) {
+        $data = News::where('id',$id)->first();
+        return view('admin.news-edit', [
+            'data' => $data,
+            'title' => 'Edit News',
+        ]);
+    }
+
+    public function newsUpdate (Request $request)
+    {
+        $update = News::where('id',$request->id)
+            ->update([
+                'title'     => $request->title,
+                'content'   => $request->content,
+                //'thumbnail' => $request->thumbnail,
+                'status'    => $request->status,
+            ]);
+        return redirect ('admin/news')->with("success","Data updated successfully...");
+    }
+
+    public function newsDelete (Request $request) {
+        $News = News::where('id', $request->id)->get();
+        if (!$News) {
+            return redirect ('admin/news')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = News::where('id', $request->id)->delete();
+            return redirect ('admin/news')->with("success","Data deleted successfully...");
+        }
+    }
+
+    public function servicesIndex () {
+        $title = 'Services';
+        $data = Services::orderBy('id', 'desc')->paginate(20);
+        return view('admin.services-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function servicesAdd () {
+        $title = 'Add Services';
+        return view('admin.services-add', [
+            'title' => $title,
+        ]);
+    }
+
+    public function servicesStore (Request $request) {
+        $request->validate([
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
+        $file = $request->file('icon');
+        $imageName1 = time().'-'.$file->getClientOriginalName();
+        $imageName2 = Str::lower($imageName1);
+        $imageName3 = preg_replace('/\s+/', '', $imageName2);
+        $img = $request->icon->move(public_path('storage/images'), $imageName3);
+
+        $Services = new Services;
+        $Services->icon     = $imageName3;
+        $Services->title    = $request->title;
+        $Services->content  = $request->content;
+        $Services->save();
+        return redirect ('admin/services')->with("success","Data created successfully...");
+    }
+
+    public function servicesEdit ($id) {
+        $data = Services::where('id',$id)->first();
+        return view('admin.services-edit', [
+            'data' => $data,
+            'title' => 'Edit Services',
+        ]);
+    }
+
+    public function servicesUpdate (Request $request)
+    {
+        $update = Services::where('id',$request->id)
+            ->update([
+                'title'     => $request->title,
+                'content'   => $request->content,
+                //'icon' => $request->icon,
+            ]);
+        return redirect ('admin/services')->with("success","Data updated successfully...");
+    }
+
+    public function servicesDelete (Request $request) {
+        $Services = Services::where('id', $request->id)->get();
+        if (!$Services) {
+            return redirect ('admin/services')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = Services::where('id', $request->id)->delete();
+            return redirect ('admin/services')->with("success","Data deleted successfully...");
+        }
+    }
+
+    public function faqIndex () {
+        $title = 'FAQ';
+        $data = Faqs::orderBy('id', 'desc')->paginate(20);
+        return view('admin.faq-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function faqAdd () {
+        $title = 'Add FAQ';
+        return view('admin.faq-add', [
+            'title' => $title,
+        ]);
+    }
+
+    public function faqStore (Request $request) {
+        $Faqs = new Faqs;
+        $Faqs->title    = $request->title;
+        $Faqs->content  = $request->content;
+        $Faqs->save();
+        return redirect ('admin/faqs')->with("success","Data created successfully...");
+    }
+
+    public function faqEdit ($id) {
+        $data = Faqs::where('id',$id)->first();
+        return view('admin.faq-edit', [
+            'data' => $data,
+            'title' => 'Edit FAQ',
+        ]);
+    }
+
+    public function faqUpdate (Request $request)
+    {
+        $update = Faqs::where('id',$request->id)
+            ->update([
+                'title'     => $request->title,
+                'content'   => $request->content,
+            ]);
+        return redirect ('admin/faqs')->with("success","Data updated successfully...");
+    }
+
+    public function faqDelete (Request $request) {
+        $Faqs = Faqs::where('id', $request->id)->get();
+        if (!$Faqs) {
+            return redirect ('admin/faqs')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = Faqs::where('id', $request->id)->delete();
+            return redirect ('admin/faqs')->with("success","Data deleted successfully...");
+        }
+    }
+
+    public function testimonialsIndex () {
+        $title = 'Testimonials';
+        $data = Testimonials::orderBy('id', 'desc')->paginate(20);
+        return view('admin.testimonial-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function testimonialsAdd () {
+        $title = 'Add Testimonial';
+        return view('admin.testimonial-add', [
+            'title' => $title,
+        ]);
+    }
+
+    public function testimonialsStore (Request $request) {
+        $Testimonials = new Testimonials;
+        $Testimonials->name     = $request->name;
+        $Testimonials->company  = $request->company;
+        $Testimonials->content  = $request->content;
+        $Testimonials->save();
+        return redirect ('admin/testimonials')->with("success","Data created successfully...");
+    }
+
+    public function testimonialsEdit ($id) {
+        $data = Testimonials::where('id',$id)->first();
+        return view('admin.testimonial-edit', [
+            'data' => $data,
+            'title' => 'Edit Testimonial',
+        ]);
+    }
+
+    public function testimonialsUpdate (Request $request)
+    {
+        $update = Testimonials::where('id',$request->id)
+            ->update([
+                'name'      => $request->name,
+                'company'   => $request->company,
+                'content'   => $request->content,
+            ]);
+        return redirect ('admin/testimonials')->with("success","Data updated successfully...");
+    }
+
+    public function testimonialsDelete (Request $request) {
+        $Testimonials = Testimonials::where('id', $request->id)->get();
+        if (!$Testimonials) {
+            return redirect ('admin/testimonials')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = Testimonials::where('id', $request->id)->delete();
+            return redirect ('admin/testimonials')->with("success","Data deleted successfully...");
+        }
+    }
+
+    public function teamIndex () {
+        $title = 'Team';
+        $data = Team::orderBy('id', 'desc')->paginate(20);
+        return view('admin.team-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function teamAdd () {
+        $title = 'Add Team';
+        return view('admin.team-add', [
+            'title' => $title,
+        ]);
+    }
+
+    public function teamStore (Request $request) {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
+        $file = $request->file('image');
+        $imageName1 = time().'-'.$file->getClientOriginalName();
+        $imageName2 = Str::lower($imageName1);
+        $imageName3 = preg_replace('/\s+/', '', $imageName2);
+        $img = $request->image->move(public_path('storage/images'), $imageName3);
+
+        $Team = new Team;
+        $Team->name     = $request->name;
+        $Team->position = $request->position;
+        $Team->image    = $imageName3;
+        $Team->save();
+        return redirect ('admin/team')->with("success","Data created successfully...");
+    }
+
+    public function teamEdit ($id) {
+        $data = Team::where('id',$id)->first();
+        return view('admin.team-edit', [
+            'data' => $data,
+            'title' => 'Edit Team',
+        ]);
+    }
+
+    public function teamUpdate (Request $request)
+    {
+        $update = Team::where('id',$request->id)
+            ->update([
+                'name'      => $request->name,
+                'position'  => $request->position,
+                //'image'     => $request->image,
+            ]);
+        return redirect ('admin/team')->with("success","Data updated successfully...");
+    }
+
+    public function teamDelete (Request $request) {
+        $Team = Team::where('id', $request->id)->get();
+        if (!$Team) {
+            return redirect ('admin/team')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = Team::where('id', $request->id)->delete();
+            return redirect ('admin/team')->with("success","Data deleted successfully...");
+        }
+    }
+
+
+
+
+
+    //
+
+    public function priceIndex () {
+        $title = 'Price';
+        $data = Prices::orderBy('id', 'desc')->paginate(20);
+        return view('admin.price-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function priceAdd () {
+        $title = 'Add Price';
+        return view('admin.price-add', [
+            'title' => $title,
+        ]);
+    }
+
+    public function priceStore (Request $request) {
+        $Prices = new Prices;
+        $Prices->title      = $request->title;
+        $Prices->content    = $request->content;
+        $Prices->price      = $request->price;
+        $Prices->notes      = $request->notes;
+        $Prices->button     = $request->button;
+        $Prices->save();
+        return redirect ('admin/price')->with("success","Data created successfully...");
+    }
+
+    public function priceEdit ($id) {
+        $data = Prices::where('id',$id)->first();
+        return view('admin.price-edit', [
+            'data' => $data,
+            'title' => 'Edit Price',
+        ]);
+    }
+
+    public function priceUpdate (Request $request)
+    {
+        $update = Prices::where('id',$request->id)
+            ->update([
+                'title'     => $request->title,
+                'content'   => $request->content,
+                'price'     => $request->price,
+                'notes'     => $request->notes,
+                'button'    => $request->button,
+            ]);
+        return redirect ('admin/price')->with("success","Data updated successfully...");
+    }
+
+    public function priceDelete (Request $request) {
+        $Prices = Prices::where('id', $request->id)->get();
+        if (!$Prices) {
+            return redirect ('admin/price')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = Prices::where('id', $request->id)->delete();
+            return redirect ('admin/price')->with("success","Data deleted successfully...");
+        }
+    }
+
+    //
+
+}
