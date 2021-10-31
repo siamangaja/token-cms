@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Session;
 use Auth;
 use App\Models\Prices;
+use App\Models\Partners;
 
 class PricesController extends Controller
 {
@@ -21,10 +22,12 @@ class PricesController extends Controller
                 'message' => 'Page not found',
             ]);
         }
+        $Partners = Partners::orderBy('id', 'desc')->get();
         $title = 'Price';
         return view('price', [
             'title' => $title,
             'data' => $data,
+            'partners' => $Partners,
         ]);
     }
 

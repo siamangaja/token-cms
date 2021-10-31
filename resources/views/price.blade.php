@@ -60,61 +60,16 @@
                 <div class="col-12">
                     <!-- partners slider -->
                     <div class="owl-carousel partners__slider">
+                        @forelse ($partners as $p)
                         <!-- slider item -->
                         <div class="item">
                             <a href="#">
-                                <img src="img/partners/activeden-light-background.png" alt="">
+                                <a href="{{$p->link}}" target="_blank"><img src="/storage/images/{{$p->image}}" alt="{{$p->title}}" title="{{$p->title}}"></a>
                             </a>
                         </div>
                         <!-- end slider item -->
-
-                        <!-- slider item -->
-                        <div class="item">
-                            <a href="#">
-                                <img src="img/partners/audiojungle-light-background.png" alt="">
-                            </a>
-                        </div>
-                        <!-- end slider item -->
-
-                        <!-- slider item -->
-                        <div class="item">
-                            <a href="#">
-                                <img src="img/partners/codecanyon-light-background.png" alt="">
-                            </a>
-                        </div>
-                        <!-- end slider item -->
-
-                        <!-- slider item -->
-                        <div class="item">
-                            <a href="#">
-                                <img src="img/partners/photodune-light-background.png" alt="">
-                            </a>
-                        </div>
-                        <!-- end slider item -->
-
-                        <!-- slider item -->
-                        <div class="item">
-                            <a href="#">
-                                <img src="img/partners/themeforest-light-background.png" alt="">
-                            </a>
-                        </div>
-                        <!-- end slider item -->
-
-                        <!-- slider item -->
-                        <div class="item">
-                            <a href="#">
-                                <img src="img/partners/videohive-light-background.png" alt="">
-                            </a>
-                        </div>
-                        <!-- end slider item -->
-
-                        <!-- slider item -->
-                        <div class="item">
-                            <a href="#">
-                                <img src="img/partners/3docean-light-background.png" alt="">
-                            </a>
-                        </div>
-                        <!-- end slider item -->
+                        @empty
+                        @endforelse
                     </div>
                     <!-- end partners slider -->
                 </div>

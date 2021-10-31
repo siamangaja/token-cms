@@ -76,6 +76,10 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/partner/{id}/edit', [AdminController::class,'partnersEdit'])->name('partner.edit');
     Route::post('/admin/partner/{id}/edit', [AdminController::class,'partnersUpdate'])->name('partner.update');
     Route::get('/admin/partner/{id}/delete', [AdminController::class,'partnersDelete'])->name('partner.delete');
+
+    Route::get('/admin/options', [AdminController::class,'optionsIndex'])->name('options.index');
+    Route::get('/admin/options/{id}/edit', [AdminController::class,'optionsEdit'])->name('options.edit');
+    Route::post('/admin/options/{id}/edit', [AdminController::class,'optionsUpdate'])->name('options.update');
 });
 
 // User

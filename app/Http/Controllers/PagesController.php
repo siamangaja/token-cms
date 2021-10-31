@@ -11,6 +11,7 @@ use Auth;
 use App\Models\Pages;
 use App\Models\Testimonials;
 use App\Models\Team;
+use App\Models\Partners;
 
 class PagesController extends Controller
 {
@@ -51,11 +52,13 @@ class PagesController extends Controller
     public function about () {
         $Testimonials = Testimonials::orderBy('id', 'desc')->get();
         $Team = Team::orderBy('id', 'desc')->get();
-        $title = 'About Us';
+        $Partners = Partners::orderBy('id', 'desc')->get();
+        $Title = 'About Us';
         return view('about', [
-            'title'         => $title,
+            'title'         => $Title,
             'testimonials'  => $Testimonials,
             'team'          => $Team,
+            'partners'      => $Partners,
         ]);
     }
 

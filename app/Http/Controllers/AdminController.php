@@ -18,6 +18,7 @@ use App\Models\Team;
 use App\Models\Prices;
 use App\Models\Pages;
 use App\Models\Partners;
+use App\Models\Options;
 
 class AdminController extends Controller
 {
@@ -494,7 +495,6 @@ class AdminController extends Controller
         }
     }
 
-    //
     public function partnersIndex () {
         $title = 'Partners';
         $data = Partners::orderBy('id', 'desc')->paginate(20);
@@ -559,5 +559,32 @@ class AdminController extends Controller
         }
     }
 
+
+
+    public function optionsIndex () {
+        $title = 'Options';
+        $data = Options::orderBy('id', 'desc')->paginate(20);
+        return view('admin.options-index', [
+            'data'  => $data,
+            'title' => $title,
+        ]);
+    }
+
+    public function optionsEdit ($id) {
+        $data = Options::where('id',$id)->first();
+        return view('admin.options-edit', [
+            'data' => $data,
+            'title' => 'Edit Options',
+        ]);
+    }
+
+    public function optionsUpdate (Request $request)
+    {
+        $update = Options::where('id',$request->id)
+            ->update([
+                'value' => $request->value,
+            ]);
+        return redirect ('admin/options')->with("success","Web Options updated successfully...");
+    }
 
 }
