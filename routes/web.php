@@ -102,4 +102,5 @@ Route::get('/faq', [FaqsController::class,'index'])->name('faq');
 
 Route::get('about', [PagesController::class,'about'])->name('about');
 Route::get('contact', [PagesController::class,'contact'])->name('contact');
+Route::post('contact', [PagesController::class,'submitContact'])->name('submit.contact');
 Route::get('{slug}', [PagesController::class,'details']);

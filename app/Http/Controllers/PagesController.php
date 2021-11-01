@@ -12,6 +12,7 @@ use App\Models\Pages;
 use App\Models\Testimonials;
 use App\Models\Team;
 use App\Models\Partners;
+use Illuminate\Support\Facades\Mail;
 
 class PagesController extends Controller
 {
@@ -47,6 +48,21 @@ class PagesController extends Controller
             'title' => $title,
             'content' => $data->content,
         ]);
+    }
+
+    public function submitContact (Request $request) {
+        $datanotif = [
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'msg'       => $request->message,
+            'subject'   => 'Form kontak website dari: '.$request->name
+        ];
+        $SentMail = Mail::send('email-contact', $datanotif, function($message) use ($datanotif)
+        {
+            $message->to(opsi('email'));
+            $message->subject($datanotif['subject']);
+        });
+        return redirect ('contact')->with("success","Form submitted successfully...");
     }
 
     public function about () {
