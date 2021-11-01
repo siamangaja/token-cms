@@ -34,7 +34,7 @@
                 </div>
             @endif
 
-            <div class="notice d-flex p-6">
+            <!-- <div class="notice d-flex p-6">
                 <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
                     <div class="mb-3 mb-md-0 fw-bold">
                     <div class="fs-6 text-gray-700">
@@ -42,9 +42,9 @@
                     </div>
                     <a href="{{url('admin/users/add')}}" class="btn btn-primary px-6 align-self-center text-nowrap">+ Add New</a>
                 </div>
-            </div>
+            </div> -->
 
-            <br>
+            <!-- <br> -->
 
             <!--begin::Table container-->
             <div class="table-responsive">

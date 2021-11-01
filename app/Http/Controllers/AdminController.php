@@ -559,11 +559,9 @@ class AdminController extends Controller
         }
     }
 
-
-
     public function optionsIndex () {
         $title = 'Options';
-        $data = Options::orderBy('id', 'desc')->paginate(20);
+        $data = Options::orderBy('id', 'asc')->paginate(20);
         return view('admin.options-index', [
             'data'  => $data,
             'title' => $title,
