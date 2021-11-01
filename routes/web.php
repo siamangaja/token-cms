@@ -22,6 +22,8 @@ Route::get('/admin/logout', [AdminAuthController::class,'postLogout'])->name('lo
 Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin', [AdminController::class,'profile'])->name('dashboard.admin');
     Route::get('/admin/profile', [AdminController::class,'profile'])->name('profile.admin');
+    Route::get('/admin/change-password', [AdminController::class,'changePassword'])->name('admin.change-password');
+    Route::post('/admin/change-password', [AdminController::class,'savePassword']);
     Route::get('/admin/users', [AdminController::class,'userIndex'])->name('user.index');
     Route::get('/admin/user/{id}/edit', [AdminController::class,'userEdit']);
     Route::post('/admin/user', [AdminController::class,'userUpdate'])->name('user.update');

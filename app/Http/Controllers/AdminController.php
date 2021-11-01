@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use DB;
 use Session;
 use Auth;
+use Hash;
 use Route;
 use App\Models\Admin;
 use App\Models\User;
@@ -30,6 +31,32 @@ class AdminController extends Controller
             'd' => $d,
             'title' => $title,
         ]);
+    }
+
+    public function changePassword () {
+        $id = auth()->id();
+        $d = User::where('id', auth()->id())->first();
+        $title = ' Change Password';
+        return view('admin.change-password', [
+            'd' => $d,
+            'title' => $title,
+        ]);
+    }
+
+    public function savePassword (Request $request){
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+        return redirect()->back()->with("error","Your current password that you entered does not match...");
+        }
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+        return redirect()->back()->with("error","New password must not be the same as the current one....");
+        }
+        if(!(strcmp($request->get('new-password'), $request->get('new-password-confirm'))) == 0){
+            return redirect()->back()->with("error","Your new password that you entered does not match...");
+        }
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('new-password'));
+        $user->save();
+        return redirect()->back()->with("success","Your password has been changed successfully...");
     }
 
     public function userIndex () {
