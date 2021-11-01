@@ -39,8 +39,14 @@
             <li><a href="{{route('contact')}}">Contact</a></li>
         </ul>
         <!-- end navigation -->
+        
+        @guest('user')
+            <a href="{{route('login')}}" class="btn btn--header">Sign In</a>
+        @endguest
 
-        <a href="{{route('login')}}" class="btn btn--header">sign in</a>
+        @auth('user')
+            <a href="{{route('logout')}}" class="btn btn--header">Logout</a>
+        @endauth
 
         <!-- mob button -->
         <button class="header__menu" type="button">
@@ -63,7 +69,7 @@
                             <img src="img/logo.svg" alt="">
                         </a>
                     </div>
-                    <p class="footer__tagline">Crypto mining platform, <br>Cloud mining HTML Template.</p>
+                    <p class="footer__tagline">{{opsi('website')}} <br>{{opsi('slogan')}}</p>
                     <ul class="footer__social">
                         <li><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#ebebeb"/><path fill-rule="evenodd" clip-rule="evenodd" d="M15.3158 14.4213C15.3056 15.2359 16.0359 15.6905 16.5862 15.9608C17.1515 16.2381 17.3414 16.4159 17.3392 16.6639C17.3349 17.0435 16.8882 17.2109 16.4702 17.2175C15.7606 17.2286 15.34 17.0302 15.0073 16.8732L14.9798 16.8602L14.7171 18.0995C15.0553 18.2566 15.6815 18.3937 16.331 18.3997C17.8554 18.3997 18.8528 17.6411 18.8582 16.4649C18.8618 15.5719 18.128 15.1835 17.5409 14.8728C17.1466 14.6641 16.8184 14.4904 16.824 14.2223C16.8289 14.02 17.0204 13.8041 17.4401 13.7492C17.6477 13.7215 18.2212 13.7003 18.8712 14.0021L19.1263 12.803C18.7768 12.6747 18.3274 12.5518 17.768 12.5518C16.3332 12.5518 15.3239 13.3207 15.3158 14.4213ZM21.578 12.6551C21.2997 12.6551 21.065 12.8188 20.9604 13.07L18.7827 18.3115H20.306L20.6092 17.467L22.4707 17.467L22.6466 18.3115H23.9892L22.8176 12.6551H21.578ZM22.2307 16.3071L21.7911 14.1831L21.0267 16.3071H22.2307ZM13.4688 12.6551L12.2681 18.3115H13.7197L14.9199 12.6551H13.4688ZM9.81044 16.5051L11.3214 12.6551H12.8458L10.4939 18.3115H8.95977L7.80216 13.7976C7.73204 13.5197 7.67108 13.4175 7.45747 13.3006C7.10846 13.1092 6.53236 12.9303 6.0253 12.8193L6.05982 12.6551H8.52985C8.84433 12.6551 9.12753 12.8661 9.19928 13.2315L9.81044 16.5051Z" fill="url(#paint0_linear)"/><defs><linearGradient id="paint0_linear" x1="6.05661" y1="14.3504" x2="11.1343" y2="7.19927" gradientUnits="userSpaceOnUse"><stop stop-color="#222357"/><stop offset="1" stop-color="#254AA5"/></linearGradient></defs></svg></li>
                         <li><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 30C23.2843 30 30 23.2843 30 15C30 6.71573 23.2843 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30Z" fill="#ebebeb"/><path d="M23.9868 15.0723C23.9868 18.1491 21.4973 20.6434 18.4263 20.6434C15.3552 20.6434 12.8657 18.1491 12.8657 15.0723C12.8657 11.9955 15.3552 9.50122 18.4263 9.50122C21.4973 9.50122 23.9868 11.9955 23.9868 15.0723V15.0723Z" fill="#F79F1A"/><path d="M17.127 15.0723C17.127 18.1491 14.6375 20.6434 11.5664 20.6434C8.49544 20.6434 6.00589 18.1491 6.00589 15.0723C6.00589 11.9955 8.49544 9.50122 11.5664 9.50122C14.6375 9.50122 17.127 11.9955 17.127 15.0723V15.0723Z" fill="#EA001B"/><path d="M14.9964 10.6866C13.6989 11.7065 12.8661 13.2914 12.8661 15.0717C12.8661 16.8521 13.6989 18.4381 14.9964 19.458C16.2938 18.4381 17.1266 16.8521 17.1266 15.0717C17.1266 13.2914 16.2938 11.7065 14.9964 10.6866V10.6866Z" fill="#FF5F01"/></svg></li>
@@ -77,8 +83,8 @@
                     <ul class="footer__list">
                         <li><a href="{{route('services')}}">Services</a></li>
                         <li><a href="{{route('faq')}}">FAQ</a></li>
-                        <li><a href="{{url('/')}}">Forex</a></li>
-                        <li><a href="{{url('/')}}">Commodities</a></li>
+                        <li><a href="{{url('terms-conditions')}}">Terms & Conditions</a></li>
+                        <li><a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
                     </ul>
                 </div>
 
@@ -112,9 +118,6 @@
                         <ul>
                             <li><a href="{{url('terms-conditions')}}">Terms & Conditions</a></li>
                             <li><a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
-                            <li><a href="{{url('admin')}}">Admin Panel</a></li>
-                            <li><a href="{{route('logout.admin')}}">Logout Admin</a></li>
-                            <li><a href="{{route('logout')}}">Logout User</a></li>
                         </ul>
                     </div>
                 </div>

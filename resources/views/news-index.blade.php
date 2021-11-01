@@ -46,7 +46,7 @@
                             @forelse ($data as $d)
                             <article class="post">
                                 <figure class="post__img">
-                                    <img src="/storage/images/{{$d->thumbnail}}" alt="">
+                                    <a href="news/{{$d->slug}}"><img src="/storage/images/{{$d->thumbnail}}" alt="{{$d->title}} title="{{$d->title}}"></a>
                                 </figure>
 
                                 <header class="post__header">

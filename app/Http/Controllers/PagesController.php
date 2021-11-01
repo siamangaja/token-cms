@@ -12,10 +12,26 @@ use App\Models\Pages;
 use App\Models\Testimonials;
 use App\Models\Team;
 use App\Models\Partners;
+use App\Models\Prices;
+use App\Models\Services;
 use Illuminate\Support\Facades\Mail;
 
 class PagesController extends Controller
 {
+
+    public function frontpage () {
+        $Services = Services::orderBy('id', 'desc')->get();
+        $Prices = Prices::orderBy('id', 'desc')->get();
+        $Testimonials = Testimonials::orderBy('id', 'desc')->get();
+        $Partners = Partners::orderBy('id', 'desc')->get();
+        return view('frontpage', [
+            'title'         => opsi('website'),
+            'Services'      => $Services,
+            'Testimonials'  => $Testimonials,
+            'Prices'        => $Prices,
+            'Partners'      => $Partners,
+        ]);
+    }
 
     public function details (Request $request) {
         $data = Pages::where('slug', $request->slug)->first();

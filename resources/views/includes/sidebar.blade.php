@@ -46,7 +46,7 @@
         </a>
     </div>
     <div class="menu-item">
-        <a class="menu-link {{set_active('user.change-password')}}" href="admin/change-password">
+        <a class="menu-link {{set_active('user.change-password')}}" href="#">
             <span class="menu-icon">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                 <span class="svg-icon svg-icon-2">

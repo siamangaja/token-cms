@@ -12,9 +12,7 @@ use App\Http\Controllers\PricesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 
-Route::get('/', function () {
-    return view('frontpage');
-});
+Route::get('/', [PagesController::class,'frontpage'])->name('frontpage');
 
 Route::get('/admin/login', [AdminAuthController::class,'getLogin'])->name('login-admin');
 Route::post('/admin/login', [AdminAuthController::class,'postLogin'])->name('login.admin.submit');

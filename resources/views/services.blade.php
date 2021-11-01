@@ -63,7 +63,7 @@
             <div class="row">
                 <!-- section title -->
                 <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Supported currencies</h2>
+                    <h2 class="section__title">Supported Currencies</h2>
                     <p class="section__text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
                 </div>
                 <!-- end section title -->
