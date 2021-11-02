@@ -20,8 +20,8 @@ class UserController extends Controller
     }
 
 	public function index() {
-		$data = User::get();
-		return $data;
+        $data = User::where('id', auth()->id())->first();
+		return redirect ('/')->with("success", "You have successfully logged in...");
 	}
 
 }

@@ -92,14 +92,11 @@ Route::post('/login', [UserLoginController::class,'login'])->name('user.login.su
 Route::get('/logout', [UserLoginController::class,'logout'])->name('logout');
 Route::get('/register', [UserRegisterController::class,'showRegisterForm'])->name('user.register');
 Route::post('/register', [UserRegisterController::class,'register'])->name('user.register.submit');
-
 Route::get('/news', [NewsController::class,'index'])->name('news');
 Route::get('/news/{slug}', [NewsController::class,'details']);
-
 Route::get('/services', [ServicesController::class,'index'])->name('services');
 Route::get('/price', [PricesController::class,'index'])->name('price');
 Route::get('/faq', [FaqsController::class,'index'])->name('faq');
-
 Route::get('about', [PagesController::class,'about'])->name('about');
 Route::get('contact', [PagesController::class,'contact'])->name('contact');
 Route::post('contact', [PagesController::class,'submitContact'])->name('submit.contact');
