@@ -20,7 +20,7 @@ Route::get('/admin/logout', [AdminAuthController::class,'postLogout'])->name('lo
 
 // Admin
 Route::group(['middleware' => ['auth:admin']], function () {
-    Route::get('/admin', [AdminController::class,'profile'])->name('dashboard.admin');
+    Route::get('/admin', [AdminController::class,'dashboard'])->name('dashboard.admin');
     Route::get('/admin/profile', [AdminController::class,'profile'])->name('profile.admin');
     Route::get('/admin/change-password', [AdminController::class,'changePassword'])->name('admin.change-password');
     Route::post('/admin/change-password', [AdminController::class,'savePassword']);

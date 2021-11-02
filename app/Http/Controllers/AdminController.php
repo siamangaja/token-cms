@@ -24,6 +24,12 @@ use App\Models\Options;
 class AdminController extends Controller
 {
 
+    public function dashboard () {
+        return view('admin.dashboard', [
+            'title' => 'Dashboard',
+        ]);
+    }
+
     public function profile () {
         $d = Admin::where('id', auth()->id())->first();
         $title = 'My Profile';
