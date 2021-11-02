@@ -26,7 +26,7 @@
                 <div class="col-12 col-md-6 col-xl-3">
                     <!-- service -->
                     <div class="service">
-                        <i class="ti-bolt"></i>
+                        {!! $d->icon !!}
                         <h3 class="service__title">{{$d->title}}</h3>
                         {!! $d->content !!}
                     </div>

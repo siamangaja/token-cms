@@ -40,12 +40,12 @@
                 <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label fw-bold fs-6">
-                        <span class="required">Title</span>
+                        <span class="required">Icon</span>
                     </label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="title" class="form-control form-control-lg form-control-solid" value="{{$data->title}}" required/>
+                        <input type="text" name="icon" class="form-control form-control-lg form-control-solid" value="{{$data->icon}}" required/>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -53,15 +53,12 @@
                 <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label fw-bold fs-6">
-                        <span>Icon</span>
+                        <span class="required">Title</span>
                     </label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-1 fv-row">
-                        <img src="storage/images/{{ $data->icon }}" width="50">
-                    </div>
-                    <div class="col-lg-5 fv-row">
-                        <input type="file" name="icon" class="form-control form-control-lg form-control-solid" />
+                    <div class="col-lg-8 fv-row">
+                        <input type="text" name="title" class="form-control form-control-lg form-control-solid" value="{{$data->title}}" required/>
                     </div>
                     <!--end::Col-->
                 </div>

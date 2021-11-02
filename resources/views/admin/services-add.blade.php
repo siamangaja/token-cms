@@ -45,7 +45,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="file" name="icon" class="form-control form-control-lg form-control-solid" required/>
+                        <input type="text" name="icon" class="form-control form-control-lg form-control-solid" required/>
                     </div>
                     <!--end::Col-->
                 </div>

@@ -192,17 +192,8 @@ class AdminController extends Controller
     }
 
     public function servicesStore (Request $request) {
-        $request->validate([
-            'icon' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
-        ]);
-        $file = $request->file('icon');
-        $imageName1 = time().'-'.$file->getClientOriginalName();
-        $imageName2 = Str::lower($imageName1);
-        $imageName3 = preg_replace('/\s+/', '', $imageName2);
-        $img = $request->icon->move(public_path('storage/images'), $imageName3);
-
         $Services = new Services;
-        $Services->icon     = $imageName3;
+        $Services->icon     = $request->icon;
         $Services->title    = $request->title;
         $Services->content  = $request->content;
         $Services->save();
@@ -221,9 +212,9 @@ class AdminController extends Controller
     {
         $update = Services::where('id',$request->id)
             ->update([
+                'icon'      => $request->icon,
                 'title'     => $request->title,
                 'content'   => $request->content,
-                //'icon' => $request->icon,
             ]);
         return redirect ('admin/services')->with("success","Data updated successfully...");
     }

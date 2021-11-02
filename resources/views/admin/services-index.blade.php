@@ -64,7 +64,7 @@
                     <tbody class="fs-6">
                         @forelse ($data as $d)
                         <tr>
-                            <td><img src="storage/images/{{ $d->icon }}" width="50"></td>
+                            <td>{{ $d->icon }}</td>
                             <td>{{ $d->title }}</td>
                             <td><small>{!! Str::limit( strip_tags( $d->content ), 150 ) !!}</small></td>
                             <td>

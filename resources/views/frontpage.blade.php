@@ -70,7 +70,7 @@
                 <div class="col-12 col-md-6 col-xl-3">
                     <!-- service -->
                     <div class="service">
-                        <i class="ti-bolt"></i>
+                        {!! $s->icon !!}
                         <h3 class="service__title">{{$s->title}}</h3>
                         {!! $s->content !!}
                     </div>
