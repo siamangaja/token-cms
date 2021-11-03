@@ -25,7 +25,7 @@ class PagesController extends Controller
         $Testimonials = Testimonials::orderBy('id', 'desc')->get();
         $Partners = Partners::orderBy('id', 'desc')->get();
         return view('frontpage', [
-            'title'         => opsi('website'),
+            'title'         => 'Home',
             'Services'      => $Services,
             'Testimonials'  => $Testimonials,
             'Prices'        => $Prices,
