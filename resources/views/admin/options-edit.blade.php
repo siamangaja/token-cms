@@ -40,13 +40,13 @@
                 <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label fw-bold fs-6">
-                        <span class="required">Name</span>
+                        <span class="required">Option Name</span>
                     </label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
-                            <span>{{$data->name}}</span>
+                            <span>{{$data->name}} ({{$data->description}})</span>
                         </label>
                     </div>
                     <!--end::Col-->
@@ -60,22 +60,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="value" class="form-control form-control-lg form-control-solid" value="{{$data->value}}" required/>
-                    </div>
-                    <!--end::Col-->
-                </div>
-
-                <div class="row mb-6">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">
-                        <span>Description</span>
-                    </label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">
-                            <span>{{$data->description}}</span>
-                        </label>
+                        <input type="text" name="value" class="form-control form-control-lg" value="{{$data->value}}" required/>
                     </div>
                     <!--end::Col-->
                 </div>

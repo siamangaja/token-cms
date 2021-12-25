@@ -3333,7 +3333,7 @@ ul {
   margin-bottom: 20px;
 }
 .footer__list {
-  margin-bottom: 40px;
+  margin-bottom: 15px;
 }
 .footer__list li {
   margin-bottom: 10px;
@@ -3357,7 +3357,7 @@ ul {
   font-size: 14px;
   line-height: 24px;
   color: #757575;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 .footer__social {
   display: flex;

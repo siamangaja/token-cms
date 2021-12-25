@@ -6,6 +6,7 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
 <!--begin::Container-->
 <div id="kt_content_container" class="container-xxl">
+
 <!--begin::Basic info-->
 <div class="card mb-5 mb-xl-10">
     <!--begin::Card header-->
@@ -34,13 +35,43 @@
                 </div>
             @endif
 
-            <div class="notice d-flex p-6">
-                <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-                    <div class="mb-3 mb-md-0 fw-bold">
-                    <div class="fs-6 text-gray-700">
+            <div class="row">
+                <form id="" class="form" action="{{route('price.headline')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="col-lg-12 fv-row">
+                        <textarea id="content" name="content" class="ckeditor" rows="10" cols="50">{!! htmlentities($headline->content) !!}</textarea>
                     </div>
+                    <div class="col-lg-12 fv-row">
+                        <br><button type="submit" class="btn btn-primary" id="submit">Save</button>
                     </div>
-                    <a href="{{url('admin/price/add')}}" class="btn btn-primary px-6 align-self-center text-nowrap">+ Add New</a>
+                </form>
+            </div>
+
+        </div>
+        <!--end::Card body-->
+
+    </div>
+    <!--end::Content-->
+</div>
+<!--end::Basic info-->
+
+
+<!--begin::Basic info-->
+<div class="card mb-5 mb-xl-10">
+
+    <!--begin::Content-->
+    <div id="kt_account_profile_details" class="collapse show">
+
+        <!--begin::Card body-->
+        <div class="card-body pt-0">
+
+            <br><br>
+            <div class="row">
+                <div class="col-lg-10">
+                    <h3 class="fw-bolder m-0">{{$title}} List</h3>
+                </div>
+                <div class="col-lg-2">
+                    <a href="{{url('admin/services/add')}}" class="btn btn-success px-6 align-self-center text-nowrap">+ Add New</a>
                 </div>
             </div>
 
@@ -106,3 +137,10 @@
 </div>
 <!--end::Post-->
 @stop
+
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+</script>

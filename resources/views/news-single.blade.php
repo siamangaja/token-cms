@@ -33,13 +33,6 @@
                         </div>
                         <!-- end article content -->
 
-                        <!-- article social -->
-                        <div class="article__social" style="border: none !important;">
-                            <a class="article__social-btn article__social-btn--fb" href="#"><i class="ti-facebook"></i><span>share</span></a>
-                            <a class="article__social-btn article__social-btn--tw" href="#"><i class="ti-twitter-alt"></i><span>tweet</span></a>
-                        </div>
-                        <!-- end article social -->
-
                     </div>
                 </div>
             </div>

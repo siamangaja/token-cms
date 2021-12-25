@@ -23,8 +23,9 @@
             <div class="row">
                 <!-- section title -->
                 <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Our Team</h2>
-                    <p class="section__text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't <b>anything</b> embarrassing hidden in the middle of text.</p>
+                    <center>
+                        {!! $hTeam->content !!}
+                    </center>
                 </div>
                 <!-- end section title -->
             </div>
@@ -48,38 +49,6 @@
         </div>
     </section>
     <!-- end team -->
-
-    <!-- testimonials -->
-    <section class="section section--blue">
-        <div class="container">
-            <div class="row">
-                <!-- section title -->
-                <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Client Testimonials</h2>
-                    <p class="section__text">What 100% real people say about us</p>
-                </div>
-                <!-- end section title -->
-            </div>
-        </div>
-        <!-- testimonials slider -->
-        <div class="owl-carousel testimonial-slider testimonial-slider--blue">
-            @forelse ($testimonials as $d)
-            <div class="testimonial">
-                <div class="testimonial__text">
-                    {!! $d->content !!}
-                </div>
-                <div class="testimonial__client">
-                    <img src="img/users/user1.jpg" alt="">
-                    <p>{{$d->name}}</p>
-                    <span>{{$d->company}}</span>
-                </div>
-            </div>
-            @empty
-            @endforelse
-        </div>
-        <!-- end testimonials slider -->
-    </section>
-    <!-- end testimonials -->
 
     <!-- partners -->
     <div class="partners section--border-bottom">

@@ -45,25 +45,19 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <input type="text" name="title" class="form-control form-control-lg form-control-solid" value="{{$data->title}}" required/>
+                        <input type="text" name="title" class="form-control form-control-lg" value="{{$data->title}}" required/>
                     </div>
                     <!--end::Col-->
                 </div>
 
                 <div class="row mb-6">
-                    <!--begin::Label-->
                     <label class="col-lg-4 col-form-label fw-bold fs-6">
                         <span>Thumbnail</span>
                     </label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-1 fv-row">
-                        <img src="storage/images/{{ $data->thumbnail }}" width="73">
+                    <div class="col-lg-8 fv-row">
+                        <img src="storage/images/{{ $data->thumbnail }}" width="200"><br><br>
+                        <input type="file" name="thumbnail" class="form-control form-control-lg" />
                     </div>
-                    <div class="col-lg-5 fv-row">
-                        <input type="file" name="thumbnail" class="form-control form-control-lg form-control-solid" />
-                    </div>
-                    <!--end::Col-->
                 </div>
 
                 <div class="row mb-6">
@@ -86,7 +80,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <select class="form-control form-control-lg form-control-solid" id="status" name="status" required>
+                        <select class="form-control form-control-lg" id="status" name="status" required>
                             <option value="">-Select-</option>
                             <option value="1" {{($data->status =='1') ? 'selected' : ''}}> Published </option>
                             <option value="0" {{($data->status =='0') ? 'selected' : ''}}> Draft </option>

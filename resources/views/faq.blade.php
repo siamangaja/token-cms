@@ -32,8 +32,17 @@
                 @empty
                 @endforelse
             </div>
+            
+            <center>{{ $data->links() }}</center>
+
         </div>
     </section>
     <!-- end faq -->
+
+<style>
+    .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        display: none !important;
+    }
+</style>
 
 @stop

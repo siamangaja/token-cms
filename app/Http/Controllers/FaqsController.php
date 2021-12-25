@@ -18,7 +18,7 @@ class FaqsController extends Controller
 
     public function index() {
         $title = 'FAQ';
-        $data = Faqs::orderBy('id', 'desc')->get();
+        $data = Faqs::orderBy('id', 'asc')->paginate(12);
 
         if (!$data) {
             return response()->json([

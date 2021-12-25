@@ -22,7 +22,7 @@
                 <div class="col-xl-5 offset-xl-1">
                     <div class="home__content home__content--desk">
                         <div class="servers">
-                            <div class="servers__title">Server status</div>
+                            <div class="servers__title">Server Status</div>
                             <div class="servers__item servers__item--green" title="Online">
                                 Europe - Amsterdam
                             </div>
@@ -59,8 +59,9 @@
             <div class="row">
                 <!-- section title -->
                 <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Our Services</h2>
-                    <p class="section__text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
+                    <center>
+                        {!! $hService->content !!}
+                    </center>
                 </div>
                 <!-- end section title -->
             </div>
@@ -103,7 +104,7 @@
     <!-- end video -->
 
     <!-- currencies -->
-    <section class="section">
+    <section class="section section--border-bottom">
         <div class="container">
             <div class="row">
                 <!-- section title -->
@@ -243,46 +244,15 @@
     </section>
     <!-- end currencies -->
 
-    <!-- testimonials -->
-    <section class="section section--blue">
-        <div class="container">
-            <div class="row">
-                <!-- section title -->
-                <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Client Testimonials</h2>
-                    <p class="section__text">What 100% real people say about us</p>
-                </div>
-                <!-- end section title -->
-            </div>
-        </div>
-        <!-- testimonials slider -->
-        <div class="owl-carousel testimonial-slider testimonial-slider--blue">
-            @forelse ($Testimonials as $d)
-            <div class="testimonial">
-                <div class="testimonial__text">
-                    {!! $d->content !!}
-                </div>
-                <div class="testimonial__client">
-                    <img src="img/users/user1.jpg" alt="">
-                    <p>{{$d->name}}</p>
-                    <span>{{$d->company}}</span>
-                </div>
-            </div>
-            @empty
-            @endforelse
-        </div>
-        <!-- end testimonials slider -->
-    </section>
-    <!-- end testimonials -->
-
     <!-- pricing -->
-    <section class="section section--border-bottom">
+    <section class="section">
         <div class="container">
             <div class="row">
                 <!-- section title -->
                 <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Pricing</h2>
-                    <p class="section__text">Various versions have evolved over the years, sometimes by accident, sometimes on purpose.</p>
+                    <center>
+                        {!! $hPrice->content !!}
+                    </center>
                 </div>
                 <!-- end section title -->
             </div>
@@ -311,26 +281,8 @@
     </section>
     <!-- end pricing -->
 
-    <!-- get started -->
-    <section class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-12">
-                    <!-- get started -->
-                    <div class="get-started">
-                        <h3 class="get-started__title">Create Account</h3>
-                        <p class="get-started__text">All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.</p>
-                        <a href="{{route('user.register')}}" class="btn">get started</a>
-                    </div>
-                    <!-- end get started -->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end get started -->
-
     <!-- partners -->
-    <div class="partners section--border-top section--border-bottom">
+    <section class="partners section--border-bottom">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -350,7 +302,7 @@
                     <!-- end partners slider -->
             </div>
         </div>
-    </div>
+    </section>
     <!-- end partners -->
 
 @stop

@@ -27,7 +27,7 @@
                         <div class="col-12 col-lg-4 order-lg-8">
                             <div class="sidebar sidebar--desk">
                                 <ul class="sidebar__posts">
-                                    @forelse ($data as $d)
+                                    @forelse ($datalist as $d)
                                     <li>
                                         <a href="news/{{$d->slug}}">{{$d->title}}</a>
                                         <span>{{ \Carbon\Carbon::parse($d->created_at)->diffForHumans() }}</span>
@@ -69,7 +69,7 @@
                             @endforelse
                             <!-- end post -->
 
-                            {{ $data->links() }}
+                            <center>{{ $data->links() }}</center>
 
                         </div>
                         <!-- end content -->
@@ -79,5 +79,11 @@
         </div>
     </div>
     <!-- end news -->
+
+<style>
+    .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        display: none !important;
+    }
+</style>
 
 @stop

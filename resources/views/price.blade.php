@@ -23,8 +23,9 @@
             <div class="row">
                 <!-- section title -->
                 <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Current Prices</h2>
-                    <p class="section__text">That guarantee you some hashing power</p>
+                    <center>
+                        {!! $hPrice->content !!}
+                    </center>
                 </div>
                 <!-- end section title -->
             </div>

@@ -14,17 +14,19 @@ class NewsController extends Controller
 {
 
     public function index() {
-        $data = News::orderBy('id', 'desc')->where('status', 1)->paginate(12);
+        $title = 'News';
+        $data = News::orderBy('id', 'desc')->where('status', 1)->paginate(6);
         if (!$data) {
             return response()->json([
                 'status' => '404',
                 'message' => 'Page not found',
             ]);
         }
-        $title = 'News';
+        $datalist = News::orderBy('id', 'desc')->where('status', 1)->take(6)->get();
         return view('news-index', [
-            'title' => $title,
-            'data' => $data,
+            'title'     => $title,
+            'data'      => $data,
+            'datalist'  => $datalist,
         ]);
     }
 

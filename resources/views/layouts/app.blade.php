@@ -36,7 +36,6 @@
             <li><a href="{{route('services')}}">Services</a></li>
             <li><a href="{{route('price')}}">Price</a></li>
             <li><a href="{{route('faq')}}">FAQ</a></li>
-            <li><a href="{{route('contact')}}">Contact</a></li>
         </ul>
         <!-- end navigation -->
         
@@ -81,7 +80,6 @@
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                     <h6 class="footer__title">Helpful</h6>
                     <ul class="footer__list">
-                        <li><a href="{{route('services')}}">Services</a></li>
                         <li><a href="{{route('faq')}}">FAQ</a></li>
                         <li><a href="{{url('terms-conditions')}}">Terms & Conditions</a></li>
                         <li><a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
@@ -92,9 +90,8 @@
                     <h6 class="footer__title">Company</h6>
                     <ul class="footer__list">
                         <li><a href="{{route('about')}}">About Us</a></li>
+                        <li><a href="{{route('services')}}">Services</a></li>
                         <li><a href="{{route('news')}}">News</a></li>
-                        <li><a href="{{route('price')}}">Price</a></li>
-                        <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
                 </div>
 

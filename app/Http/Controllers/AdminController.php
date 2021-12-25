@@ -20,6 +20,8 @@ use App\Models\Prices;
 use App\Models\Pages;
 use App\Models\Partners;
 use App\Models\Options;
+use App\Models\Headline;
+use App\Models\ServerStatus;
 
 class AdminController extends Controller
 {
@@ -178,9 +180,11 @@ class AdminController extends Controller
     public function servicesIndex () {
         $title = 'Services';
         $data = Services::orderBy('id', 'desc')->paginate(20);
+        $headline = Headline::where('key','services')->first();
         return view('admin.services-index', [
-            'data'  => $data,
-            'title' => $title,
+            'title'     => $title,
+            'data'      => $data,
+            'headline'  => $headline,
         ]);
     }
 
@@ -228,6 +232,15 @@ class AdminController extends Controller
             $Delete = Services::where('id', $request->id)->delete();
             return redirect ('admin/services')->with("success","Data deleted successfully...");
         }
+    }
+
+    public function servicesHeadline (Request $request)
+    {
+        $update = Headline::where('key','services')
+            ->update([
+                'content'   => $request->content,
+            ]);
+        return redirect ('admin/services')->with("success","Data updated successfully...");
     }
 
     public function faqIndex () {
@@ -341,9 +354,11 @@ class AdminController extends Controller
     public function teamIndex () {
         $title = 'Team';
         $data = Team::orderBy('id', 'desc')->paginate(20);
+        $headline = Headline::where('key','team')->first();
         return view('admin.team-index', [
-            'data'  => $data,
-            'title' => $title,
+            'title'     => $title,
+            'data'      => $data,
+            'headline'  => $headline,
         ]);
     }
 
@@ -402,12 +417,23 @@ class AdminController extends Controller
         }
     }
 
+    public function teamHeadline (Request $request)
+    {
+        $update = Headline::where('key','team')
+            ->update([
+                'content'   => $request->content,
+            ]);
+        return redirect ('admin/team')->with("success","Data updated successfully...");
+    }
+
     public function priceIndex () {
         $title = 'Price';
         $data = Prices::orderBy('id', 'desc')->paginate(20);
+        $headline = Headline::where('key','price')->first();
         return view('admin.price-index', [
-            'data'  => $data,
-            'title' => $title,
+            'title'     => $title,
+            'data'      => $data,
+            'headline'  => $headline,
         ]);
     }
 
@@ -459,6 +485,15 @@ class AdminController extends Controller
             $Delete = Prices::where('id', $request->id)->delete();
             return redirect ('admin/price')->with("success","Data deleted successfully...");
         }
+    }
+
+    public function priceHeadline (Request $request)
+    {
+        $update = Headline::where('key','price')
+            ->update([
+                'content'   => $request->content,
+            ]);
+        return redirect ('admin/price')->with("success","Data updated successfully...");
     }
 
     public function pagesIndex () {
@@ -607,6 +642,53 @@ class AdminController extends Controller
                 'value' => $request->value,
             ]);
         return redirect ('admin/options')->with("success","Web Options updated successfully...");
+    }
+
+    public function serverIndex () {
+        $title = 'Server Status';
+        $data = ServerStatus::orderBy('id', 'desc')->paginate(20);
+        return view('admin.server-status', [
+            'title' => $title,
+            'data'  => $data,
+        ]);
+    }
+
+    public function serverAdd (Request $request)
+    {
+        $serv = new ServerStatus;
+        $serv->title    = $request->title;
+        $serv->status   = $request->status;
+        $serv->save();
+        return redirect ('admin/server-status')->with("success","Data created successfully...");
+    }
+
+    public function serverEdit ($id)
+    {
+        $ServerStatus = ServerStatus::find($id);
+        return response()->json([
+          'data' => $ServerStatus
+        ]);
+    }
+
+    public function serverUpdate (Request $request)
+    {
+        $update = ServerStatus::where('id',$request->id)
+            ->update([
+                'title'     => $request->title,
+                'status'    => $request->status,
+            ]);
+        return redirect ('admin/server-status')->with("success","Data updated successfully...");
+    }
+
+    public function serverDelete (Request $request) {
+        $Users = ServerStatus::where('id', $request->id)->get();
+        if (!$Users) {
+            return redirect ('admin/server-status')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = ServerStatus::where('id', $request->id)->delete();
+            return redirect ('admin/server-status')->with("success","Data deleted successfully...");
+        }
     }
 
 }
