@@ -62,7 +62,6 @@
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse show">
 
-        <!--begin::Card body-->
         <div class="card-body pt-0">
         <br><br>
         <div class="row">

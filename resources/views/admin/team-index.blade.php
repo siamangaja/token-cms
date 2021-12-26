@@ -57,27 +57,19 @@
 
 <!--begin::Basic info-->
 <div class="card mb-5 mb-xl-10">
-    <!--begin::Card header-->
-    <div class="card-header border-0">
-        <!--begin::Card title-->
-        <div class="card-title m-0">
-            <h3 class="fw-bolder m-0">{{$title}} List</h3>
-        </div>
-        <!--end::Card title-->
-    </div>
-    <!--begin::Card header-->
+
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse show">
 
         <!--begin::Card body-->
         <div class="card-body pt-0">
 
-            <div class="notice d-flex p-6">
-                <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-                    <div class="mb-3 mb-md-0 fw-bold">
-                    <div class="fs-6 text-gray-700">
-                    </div>
-                    </div>
+            <br><br>
+            <div class="row">
+                <div class="col-lg-10">
+                    <h3 class="fw-bolder m-0">{{$title}} List</h3>
+                </div>
+                <div class="col-lg-2">
                     <a href="{{url('admin/team/add')}}" class="btn btn-success px-6 align-self-center text-nowrap">+ Add New</a>
                 </div>
             </div>

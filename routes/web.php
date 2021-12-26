@@ -47,12 +47,6 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/faq/{id}/edit', [AdminController::class,'faqEdit'])->name('faq.edit');
     Route::post('/admin/faq/{id}/edit', [AdminController::class,'faqUpdate'])->name('faq.update');
     Route::get('/admin/faq/{id}/delete', [AdminController::class,'faqDelete'])->name('faq.delete');
-    // Route::get('/admin/testimonials', [AdminController::class,'testimonialsIndex'])->name('testimonial.index');
-    // Route::get('/admin/testimonial/add', [AdminController::class,'testimonialsAdd'])->name('testimonial.add');
-    // Route::post('/admin/testimonial/add', [AdminController::class,'testimonialsStore'])->name('testimonial.store');
-    // Route::get('/admin/testimonial/{id}/edit', [AdminController::class,'testimonialsEdit'])->name('testimonial.edit');
-    // Route::post('/admin/testimonial/{id}/edit', [AdminController::class,'testimonialsUpdate'])->name('testimonial.update');
-    // Route::get('/admin/testimonial/{id}/delete', [AdminController::class,'testimonialsDelete'])->name('testimonial.delete');
     Route::get('/admin/team', [AdminController::class,'teamIndex'])->name('team.index');
     Route::get('/admin/team/add', [AdminController::class,'teamAdd'])->name('team.add');
     Route::post('/admin/team/add', [AdminController::class,'teamStore'])->name('team.store');
@@ -87,6 +81,14 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/admin/server-status/{id}/edit', [AdminController::class,'serverEdit']);
     Route::post('/admin/server-status', [AdminController::class,'serverUpdate'])->name('server.update');
     Route::get('/admin/server-status/{id}/delete', [AdminController::class,'serverDelete'])->name('server.delete');
+    Route::get('/admin/currencies', [AdminController::class,'currenciesIndex'])->name('currencies.index');
+    Route::post('/admin/currencies/add', [AdminController::class,'currenciesAdd'])->name('currencies.add');
+    Route::get('/admin/currencies/{id}/edit', [AdminController::class,'currenciesEdit']);
+    Route::post('/admin/currencies', [AdminController::class,'currenciesUpdate'])->name('currencies.update');
+    Route::get('/admin/currencies/{id}/delete', [AdminController::class,'currenciesDelete'])->name('currencies.delete');
+    Route::post('/admin/currencies/headline', [AdminController::class,'currenciesHeadline'])->name('currencies.headline');
+    Route::get('/admin/homepage', [AdminController::class,'homepageIndex'])->name('homepage.index');
+    Route::post('/admin/homepage', [AdminController::class,'homepageHeadline'])->name('homepage.headline');
 });
 
 // User
@@ -105,6 +107,4 @@ Route::get('/services', [ServicesController::class,'index'])->name('services');
 Route::get('/price', [PricesController::class,'index'])->name('price');
 Route::get('/faq', [FaqsController::class,'index'])->name('faq');
 Route::get('about', [PagesController::class,'about'])->name('about');
-//Route::get('contact', [PagesController::class,'contact'])->name('contact');
-//Route::post('contact', [PagesController::class,'submitContact'])->name('submit.contact');
 Route::get('{slug}', [PagesController::class,'details']);

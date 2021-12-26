@@ -14,16 +14,8 @@
 
         <!--begin::Card body-->
         <div class="card-body pt-0">
-            <br><br>
-            <div class="row">
-                <div class="col-lg-10">
-                    <h3 class="fw-bolder m-0">{{$title}}</h3>
-                </div>
-                <div class="col-lg-2">
-                    <a href="#" data-bs-toggle="modal" data-bs-target='#AddServer' class="btn btn-success px-6 align-self-center text-nowrap">+ Add New</a>
-                </div>
-            </div>
-
+            
+            <br>
             @if (session('error'))
                 <div class="alert alert-danger" role="alert">
                     {{ session('error') }}
@@ -34,6 +26,16 @@
                     {{ session('success') }}
                 </div>
             @endif
+            <br>
+
+            <div class="row">
+                <div class="col-lg-10">
+                    <h3 class="fw-bolder m-0">{{$title}}</h3>
+                </div>
+                <div class="col-lg-2">
+                    <a href="#" data-bs-toggle="modal" data-bs-target='#AddServer' class="btn btn-success px-6 align-self-center text-nowrap">+ Add New</a>
+                </div>
+            </div>
 
             <!--begin::Table container-->
             <div class="table-responsive">
@@ -136,7 +138,7 @@
                 </div>
 
                 <label class="col-lg-4 col-form-label required fw-bold fs-6">Title</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="">
+                <input type="text" class="form-control" id="title" name="title" placeholder="" required="">
 
                 <label class="col-lg-4 col-form-label required fw-bold fs-6">Status</label>
                 <select class="form-control" id="status" name="status">

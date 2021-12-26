@@ -35,8 +35,8 @@ class NewsController extends Controller
 
         if (!$data) {
             return response()->json([
-                'status' => '404',
-                'message' => 'Page not found',
+                'status'    => '404',
+                'message'   => 'Page not found',
             ]);
         }
 

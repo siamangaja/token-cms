@@ -22,6 +22,7 @@ use App\Models\Partners;
 use App\Models\Options;
 use App\Models\Headline;
 use App\Models\ServerStatus;
+use App\Models\Currencies;
 
 class AdminController extends Controller
 {
@@ -293,61 +294,6 @@ class AdminController extends Controller
         else{
             $Delete = Faqs::where('id', $request->id)->delete();
             return redirect ('admin/faqs')->with("success","Data deleted successfully...");
-        }
-    }
-
-    public function testimonialsIndex () {
-        $title = 'Testimonials';
-        $data = Testimonials::orderBy('id', 'desc')->paginate(20);
-        return view('admin.testimonial-index', [
-            'data'  => $data,
-            'title' => $title,
-        ]);
-    }
-
-    public function testimonialsAdd () {
-        $title = 'Add Testimonial';
-        return view('admin.testimonial-add', [
-            'title' => $title,
-        ]);
-    }
-
-    public function testimonialsStore (Request $request) {
-        $Testimonials = new Testimonials;
-        $Testimonials->name     = $request->name;
-        $Testimonials->company  = $request->company;
-        $Testimonials->content  = $request->content;
-        $Testimonials->save();
-        return redirect ('admin/testimonials')->with("success","Data created successfully...");
-    }
-
-    public function testimonialsEdit ($id) {
-        $data = Testimonials::where('id',$id)->first();
-        return view('admin.testimonial-edit', [
-            'data' => $data,
-            'title' => 'Edit Testimonial',
-        ]);
-    }
-
-    public function testimonialsUpdate (Request $request)
-    {
-        $update = Testimonials::where('id',$request->id)
-            ->update([
-                'name'      => $request->name,
-                'company'   => $request->company,
-                'content'   => $request->content,
-            ]);
-        return redirect ('admin/testimonials')->with("success","Data updated successfully...");
-    }
-
-    public function testimonialsDelete (Request $request) {
-        $Testimonials = Testimonials::where('id', $request->id)->get();
-        if (!$Testimonials) {
-            return redirect ('admin/testimonials')->with("error","Ups! Something wrong...");
-        }
-        else{
-            $Delete = Testimonials::where('id', $request->id)->delete();
-            return redirect ('admin/testimonials')->with("success","Data deleted successfully...");
         }
     }
 
@@ -681,14 +627,95 @@ class AdminController extends Controller
     }
 
     public function serverDelete (Request $request) {
-        $Users = ServerStatus::where('id', $request->id)->get();
-        if (!$Users) {
+        $Servers = ServerStatus::where('id', $request->id)->get();
+        if (!$Servers) {
             return redirect ('admin/server-status')->with("error","Ups! Something wrong...");
         }
         else{
             $Delete = ServerStatus::where('id', $request->id)->delete();
             return redirect ('admin/server-status')->with("success","Data deleted successfully...");
         }
+    }
+
+    public function currenciesIndex () {
+        $title = 'Currencies';
+        $data = Currencies::orderBy('id', 'desc')->paginate(20);
+        $headline = Headline::where('key','currencies')->first();
+        return view('admin.currencies', [
+            'title'     => $title,
+            'data'      => $data,
+            'headline'  => $headline,
+        ]);
+    }
+
+    public function currenciesAdd (Request $request)
+    {
+        $serv = new Currencies;
+        $serv->icon     = $request->icon;
+        $serv->name     = $request->name;
+        $serv->price    = $request->price;
+        $serv->save();
+        return redirect ('admin/currencies')->with("success","Data created successfully...");
+    }
+
+    public function currenciesEdit ($id)
+    {
+        $Currencies = Currencies::find($id);
+        return response()->json([
+          'data' => $Currencies
+        ]);
+    }
+
+    public function currenciesUpdate (Request $request)
+    {
+        $update = Currencies::where('id',$request->id)
+            ->update([
+                'icon'  => $request->icon,
+                'name'  => $request->name,
+                'price' => $request->price,
+            ]);
+        return redirect ('admin/currencies')->with("success","Data updated successfully...");
+    }
+
+    public function currenciesDelete (Request $request) {
+        $Currencies = Currencies::where('id', $request->id)->get();
+        if (!$Currencies) {
+            return redirect ('admin/currencies')->with("error","Ups! Something wrong...");
+        }
+        else{
+            $Delete = Currencies::where('id', $request->id)->delete();
+            return redirect ('admin/currencies')->with("success","Data deleted successfully...");
+        }
+    }
+
+    public function currenciesHeadline (Request $request)
+    {
+        $update = Headline::where('key','currencies')
+            ->update([
+                'content'   => $request->content,
+            ]);
+        return redirect ('admin/currencies')->with("success","Data updated successfully...");
+    }
+
+    public function homepageIndex () {
+        $title = 'Homepage';
+        $data = Currencies::orderBy('id', 'desc')->paginate(20);
+        $headline = Headline::where('key','homepage')->first();
+        return view('admin.homepage', [
+            'title'     => $title,
+            'data'      => $data,
+            'headline'  => $headline,
+        ]);
+    }
+
+    public function homepageHeadline (Request $request)
+    {
+        $update = Headline::where('key','homepage')
+            ->update([
+                'content'   => $request->content,
+                'title'     => $request->title,
+            ]);
+        return redirect ('admin/homepage')->with("success","Data updated successfully...");
     }
 
 }

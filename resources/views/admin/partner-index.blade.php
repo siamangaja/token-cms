@@ -8,21 +8,14 @@
 <div id="kt_content_container" class="container-xxl">
 <!--begin::Basic info-->
 <div class="card mb-5 mb-xl-10">
-    <!--begin::Card header-->
-    <div class="card-header border-0">
-        <!--begin::Card title-->
-        <div class="card-title m-0">
-            <h3 class="fw-bolder m-0">{{$title}}</h3>
-        </div>
-        <!--end::Card title-->
-    </div>
-    <!--begin::Card header-->
+
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse show">
 
         <!--begin::Card body-->
         <div class="card-body pt-0">
 
+            <br>
             @if (session('error'))
                 <div class="alert alert-danger" role="alert">
                     {{ session('error') }}
@@ -33,14 +26,14 @@
                     {{ session('success') }}
                 </div>
             @endif
+            <br>
 
-            <div class="notice d-flex p-6">
-                <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-                    <div class="mb-3 mb-md-0 fw-bold">
-                    <div class="fs-6 text-gray-700">
-                    </div>
-                    </div>
-                    <a href="{{url('admin/partner/add')}}" class="btn btn-primary px-6 align-self-center text-nowrap">+ Add New</a>
+            <div class="row">
+                <div class="col-lg-10">
+                    <h3 class="fw-bolder m-0">{{$title}}</h3>
+                </div>
+                <div class="col-lg-2">
+                    <a href="{{url('admin/partner/add')}}" class="btn btn-success px-6 align-self-center text-nowrap">+ Add New</a>
                 </div>
             </div>
 
@@ -65,7 +58,7 @@
                         @forelse ($data as $d)
                         <tr>
                             <td>{{ $d->title }}</td>
-                            <td><img src="storage/images/{{ $d->image }}" width="170"></td>
+                            <td><img src="storage/images/{{ $d->image }}" width="150"></td>
                             <td>{{ $d->link }}</td>
                             <td>
                                 <a href="admin/partner/{{$d->id}}/edit"><span class="btn btn-dark btn-sm"><i class="fa fa-file"></i> Edit</span></a> <a href="admin/partner/{{$d->id}}/delete" onclick="return confirm('Are you sure to delete?')"><span class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Del</span></a>

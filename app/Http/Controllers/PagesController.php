@@ -15,6 +15,8 @@ use App\Models\Partners;
 use App\Models\Prices;
 use App\Models\Services;
 use App\Models\Headline;
+use App\Models\ServerStatus;
+use App\Models\Currencies;
 use Illuminate\Support\Facades\Mail;
 
 class PagesController extends Controller
@@ -27,6 +29,10 @@ class PagesController extends Controller
         $Partners = Partners::orderBy('id', 'desc')->get();
         $hService = Headline::where('key','services')->first();
         $hPrice = Headline::where('key','price')->first();
+        $Serverstatus = ServerStatus::orderBy('id', 'asc')->get();
+        $hCurrencies = Headline::where('key','currencies')->first();
+        $Currencies = Currencies::orderBy('id', 'asc')->get();
+        $hHomepage = Headline::where('key','homepage')->first();
         return view('frontpage', [
             'title'         => 'Home',
             'Services'      => $Services,
@@ -35,6 +41,10 @@ class PagesController extends Controller
             'Partners'      => $Partners,
             'hService'      => $hService,
             'hPrice'        => $hPrice,
+            'Serverstatus'  => $Serverstatus,
+            'hCurrencies'   => $hCurrencies,
+            'Currencies'    => $Currencies,
+            'hHomepage'     => $hHomepage,
         ]);
     }
 
@@ -54,37 +64,6 @@ class PagesController extends Controller
             'data'  => $data->content,
         ]);
     }
-
-    // public function contact () {
-    //     $data = Pages::where('slug', 'contact')->first();
-
-    //     if (!$data) {
-    //         return response()->json([
-    //             'status' => '404',
-    //             'message' => 'Page not found',
-    //         ]);
-    //     }
-    //     $title = 'Contact Us';
-    //     return view('contact', [
-    //         'title' => $title,
-    //         'content' => $data->content,
-    //     ]);
-    // }
-
-    // public function submitContact (Request $request) {
-    //     $datanotif = [
-    //         'name'      => $request->name,
-    //         'email'     => $request->email,
-    //         'msg'       => $request->message,
-    //         'subject'   => 'Form kontak website dari: '.$request->name
-    //     ];
-    //     $SentMail = Mail::send('email-contact', $datanotif, function($message) use ($datanotif)
-    //     {
-    //         $message->to(opsi('email'));
-    //         $message->subject($datanotif['subject']);
-    //     });
-    //     return redirect ('contact')->with("success","Form submitted successfully...");
-    // }
 
     public function about () {
         $Title = 'About Us';

@@ -13,9 +13,8 @@
             <div class="row">
                 <div class="col-12 col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-5 offset-xl-0">
                     <div class="home__content">
-                        <h1 class="home__title">Start Bitcoin mining today!</h1>
-                        <p class="home__text">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>
-                        <a href="{{route('user.register')}}" class="btn btn--shadow">get started</a>
+                        <p class="home__text">{!! $hHomepage->content !!}</p>
+                        <a href="{{route('user.register')}}" class="btn btn--shadow">{{$hHomepage->title}}</a>
                     </div>
                 </div>
 
@@ -23,24 +22,22 @@
                     <div class="home__content home__content--desk">
                         <div class="servers">
                             <div class="servers__title">Server Status</div>
-                            <div class="servers__item servers__item--green" title="Online">
-                                Europe - Amsterdam
-                            </div>
-                            <div class="servers__item servers__item--green" title="Online">
-                                China - Hong Kong
-                            </div>
-                            <div class="servers__item servers__item--yellow" title="Unstable">
-                                India - Chennai
-                            </div>
-                            <div class="servers__item servers__item--green" title="Online">
-                                USA - San Jose
-                            </div>
-                            <div class="servers__item servers__item--green" title="Online">
-                                Japan - Tokyo
-                            </div>
-                            <div class="servers__item servers__item--red" title="Offlane">
-                                Brazil - Sao Paulo
-                            </div>
+                            @forelse ($Serverstatus as $srv)
+                                @if ($srv->status == 0)
+                                    <div class="servers__item servers__item--red" title="Offline">
+                                        {{$srv->title}}
+                                    </div>
+                                @elseif ($srv->status == 1)
+                                    <div class="servers__item servers__item--green" title="Online">
+                                        {{$srv->title}}
+                                    </div>
+                                @elseif ($srv->status == 2)
+                                    <div class="servers__item servers__item--yellow" title="Unstable">
+                                        {{$srv->title}}
+                                    </div>
+                                @endif
+                            @empty
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -107,134 +104,26 @@
     <section class="section section--border-bottom">
         <div class="container">
             <div class="row">
-                <!-- section title -->
                 <div class="col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-                    <h2 class="section__title">Supported Currencies</h2>
-                    <p class="section__text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                    <p class="section__text">
+                        <center>
+                            {!! $hCurrencies->content !!}
+                        </center>
+                    </p>
                 </div>
-                <!-- end section title -->
             </div>
 
             <div class="row">
+                @forelse ($Currencies as $c)
                 <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
                     <div class="currenc">
-                        <i class="cc BTC currenc__icon"></i>
-                        <span class="currenc__name">Bitcoin</span>
-                        <span class="currenc__hash">43.1 PH/s</span>
+                        <i class="{{$c->icon}}"></i>
+                        <span class="currenc__name">{{$c->name}}</span>
+                        <span class="currenc__hash">{{$c->price}}</span>
                     </div>
-                    <!-- end currenc -->
                 </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc ETC-alt currenc__icon"></i>
-                        <span class="currenc__name">Ethereum Classic</span>
-                        <span class="currenc__hash">20.0 GH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc ETH currenc__icon"></i>
-                        <span class="currenc__name">Ethereum</span>
-                        <span class="currenc__hash">120.1 GH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc START currenc__icon"></i>
-                        <span class="currenc__name">Startcoin</span>
-                        <span class="currenc__hash">28.6 kH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc LTC currenc__icon"></i>
-                        <span class="currenc__name">Litecoin</span>
-                        <span class="currenc__hash">2.7 GH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc XMR currenc__icon"></i>
-                        <span class="currenc__name">Monero</span>
-                        <span class="currenc__hash">44.6 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc VTC currenc__icon"></i>
-                        <span class="currenc__name">Vertcoin</span>
-                        <span class="currenc__hash">1.6 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc IFC currenc__icon"></i>
-                        <span class="currenc__name">Infinitecoin</span>
-                        <span class="currenc__hash">184.1 kH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc SLS currenc__icon"></i>
-                        <span class="currenc__name">Salus</span>
-                        <span class="currenc__hash">6.2 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc XPM currenc__icon"></i>
-                        <span class="currenc__name">PrimeCoin</span>
-                        <span class="currenc__hash">12.1 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc DASH currenc__icon"></i>
-                        <span class="currenc__name">Dash</span>
-                        <span class="currenc__hash">198.8 kH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
-
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <!-- currenc -->
-                    <div class="currenc">
-                        <i class="cc SDC currenc__icon"></i>
-                        <span class="currenc__name">Shadow</span>
-                        <span class="currenc__hash">13.5 MH/s</span>
-                    </div>
-                    <!-- end currenc -->
-                </div>
+                @empty
+                @endforelse
 
                 <div class="col-12">
                     <a href="{{route('user.register')}}" class="btn btn--center btn--section btn--shadow">get started</a>
@@ -306,3 +195,10 @@
     <!-- end partners -->
 
 @stop
+
+<style>
+    h1 {
+        font-size: 52px;
+        margin-bottom: 15px;
+    }
+</style>

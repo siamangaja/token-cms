@@ -8,21 +8,14 @@
 <div id="kt_content_container" class="container-xxl">
 <!--begin::Basic info-->
 <div class="card mb-5 mb-xl-10">
-    <!--begin::Card header-->
-    <div class="card-header border-0">
-        <!--begin::Card title-->
-        <div class="card-title m-0">
-            <h3 class="fw-bolder m-0">{{$title}}</h3>
-        </div>
-        <!--end::Card title-->
-    </div>
-    <!--begin::Card header-->
+
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse show">
 
         <!--begin::Card body-->
         <div class="card-body pt-0">
 
+            <br>
             @if (session('error'))
                 <div class="alert alert-danger" role="alert">
                     {{ session('error') }}
@@ -33,14 +26,14 @@
                     {{ session('success') }}
                 </div>
             @endif
+            <br>
 
-            <div class="notice d-flex p-6">
-                <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-                    <div class="mb-3 mb-md-0 fw-bold">
-                    <div class="fs-6 text-gray-700">
-                    </div>
-                    </div>
-                    <a href="{{url('admin/page/add')}}" class="btn btn-primary px-6 align-self-center text-nowrap">+ Add New</a>
+            <div class="row">
+                <div class="col-lg-10">
+                    <h3 class="fw-bolder m-0">{{$title}}</h3>
+                </div>
+                <div class="col-lg-2">
+                    <a href="{{url('admin/page/add')}}" class="btn btn-success px-6 align-self-center text-nowrap">+ Add New</a>
                 </div>
             </div>
 
