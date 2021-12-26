@@ -23,7 +23,7 @@
         <!-- logo -->
         <div class="header__logo">
             <a href="{{url('/')}}">
-                <img src="img/logo.svg" alt="">
+                <img src="{{ opsi('logo') }}" alt="{{ opsi('website') }}" title="{{ opsi('website') }}">
             </a>
         </div>
         <!-- end logo -->
@@ -65,7 +65,7 @@
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="footer__logo">
                         <a href="{{url('/')}}">
-                            <img src="img/logo.svg" alt="">
+                            <img src="{{ opsi('logo') }}" alt="{{ opsi('website') }}" title="{{ opsi('website') }}">
                         </a>
                     </div>
                     <p class="footer__tagline">{{opsi('website')}} <br>{{opsi('slogan')}}</p>

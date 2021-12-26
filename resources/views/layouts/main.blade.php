@@ -61,7 +61,7 @@
                         <div class="header-brand">
                             <!--begin::Logo-->
                             <a href="admin">
-                                <img alt="Logo" src="storage/images/logo.png" class="h-25px h-lg-25px" />
+                                <img alt="{{ opsi('website') }}" title="{{ opsi('website') }}" src="{{ opsi('logo') }}" style="filter: invert(0.5); max-width: 150px;"/>
                             </a>
                             <!--end::Logo-->
                             <!--begin::Aside minimize-->
